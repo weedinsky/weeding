@@ -1,187 +1,619 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Undangan Pernikahan</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap');
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Undangan Pernikahan Adelia & Rizky</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Great+Vibes&display=swap');
 
-  body,html { margin:0; padding:0; font-family:'Open Sans',sans-serif; height:100%; color:#333; }
-  * { box-sizing: border-box; }
-  
-  .cover, .content { position:fixed; top:0; left:0; width:100%; height:100%; transition: all .8s ease; }
-  
-  /* Cover Section */
-  .cover {
-    background: linear-gradient(135deg,#fdf6e3,#fbe9d7);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; z-index:10; padding:20px;
-  }
-  .envelope {
-    width:220px; height:150px; background:#fff; border:2px solid #d4b483; position:relative;
-    clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
-    margin-bottom:24px; overflow:hidden; border-radius:8px;
-  }
-  .flap {
-    position:absolute; top:0; left:0; width:100%; height:50%; background:#d4b483;
-    clip-path: polygon(0 0,100% 0,50% 100%);
-    transform-origin: top; transition: transform 1s ease;
-  }
-  .cover.open .flap { transform: rotateX(-180deg); }
-  .guest-name { font-size:1.4em; margin-top:10px; color:#444; font-weight:600; }
-  .btn-open {
-    background:#d4b483; color:#fff; border:none; padding:14px 28px; font-size:1em; border-radius:30px;
-    cursor:pointer; font-weight:600; letter-spacing:1px; transition:.3s;
-  }
-  .btn-open:hover { background:#b6935a; }
+        :root {
+            --primary-color: #B4A091;
+            --secondary-color: #A38B7C;
+            --accent-color: #E2D9D2;
+            --text-color: #333;
+            --bg-color: #F8F4F2;
+        }
 
-  /* Content Section */
-  .content {
-    opacity:0; pointer-events:none; overflow-y:auto; text-align:center; background:#faf7f2;
-    background: url('foto-pengantin.jpg') no-repeat center/cover;
-    display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:20px;
-  }
-  .content.show { opacity:1; pointer-events:auto; }
-  
-  .overlay { background:rgba(255,255,255,0.9); padding:20px; border-radius:12px; max-width:700px; margin-top:30px; }
-  .bride-groom { font-family:'Great Vibes',cursive; font-size:3em; color:#b07f3e; margin:10px 0 10px; }
-  .subtitle { font-size:1.2em; color:#444; margin-bottom:20px; }
-  .quran { font-style:italic; font-size:0.95em; color:#555; margin:20px 0; line-height:1.6; }
-  .invitation-text { line-height:1.8; margin-bottom:20px; }
-  .divider { width:80px; height:3px; background:#d4b483; margin:24px auto; border-radius:2px; }
-  .details { background:#fff; padding:20px; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,0.08); text-align:left; margin-bottom:20px; }
-  .details h3 { margin-top:0; color:#b07f3e; }
-  .details ul { list-style:none; padding:0; margin:0; }
-  .details li { margin-bottom:10px; }
-  
-  a.btn-link {
-    display:inline-block; margin:12px 6px; padding:12px 24px; text-decoration:none;
-    border-radius:30px; font-weight:600; color:#fff; background:#d4b483; transition:.3s;
-  }
-  a.btn-link:hover { background:#b6935a; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cormorant Garamond', serif;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        * { box-sizing: border-box; }
 
-  .gift { font-size:0.9em; margin-top:20px; }
-  .gift-box { background:#fff; border:1px solid #eee; padding:12px; border-radius:8px; display:inline-block; margin-top:10px; }
-  .gift-box strong { color:#333; }
-</style>
+        /* COVER */
+        .cover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('foto-pengantin.jpg') center/cover no-repeat;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; z-index: 10; padding: 20px;
+            transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
+        }
+
+        .cover::before {
+            content: "";
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: 0;
+        }
+        
+        .cover-content {
+            position: relative; z-index: 1; color: white; text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+            animation: fadeIn 2s ease forwards;
+            padding: 20px;
+        }
+        
+        .cover h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            margin: 0 0 10px;
+            color: var(--accent-color);
+            animation: zoomIn 2s ease forwards;
+        }
+        
+        .cover p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .btn-open {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1em;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: .3s;
+        }
+        
+        .btn-open:hover { background-color: var(--secondary-color); }
+
+        /* ANIMASI */
+        @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+        @keyframes zoomIn { from{transform:scale(0.8); opacity:0;} to{transform:scale(1); opacity:1;} }
+        @keyframes slideInUp { from{transform:translateY(50px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+        @keyframes slideInLeft { from{transform:translateX(-50px); opacity:0;} to{transform:translateX(0); opacity:1;} }
+        @keyframes slideInRight { from{transform:translateX(50px); opacity:0;} to{transform:translateX(0); opacity:1;} }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* ISI UNDANGAN */
+        .content {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: url('foto-pengantin.jpg') center/cover fixed no-repeat;
+        }
+        
+        .content::before {
+            content: "";
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 0;
+        }
+        
+        .content.show {
+            display: flex;
+            animation: fadeIn 1.5s ease forwards;
+        }
+        
+        .section-container {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: slideInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        .section-container:nth-child(1) { animation-delay: 0.2s; }
+        .section-container:nth-child(2) { animation-delay: 0.4s; }
+        .section-container:nth-child(3) { animation-delay: 0.6s; }
+        .section-container:nth-child(4) { animation-delay: 0.8s; }
+
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #555;
+            animation: slideInLeft 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
+        }
+
+        /* Gaya baru untuk batik animasi */
+        .batik-pattern {
+            width: 30px;
+            height: 30px;
+            background: url('batik-pattern.svg') center/cover no-repeat;
+            display: inline-block;
+            margin: 0 5px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .bride-groom {
+            font-family: 'Great Vibes', cursive; font-size: 3em; color: var(--primary-color);
+            margin: 20px 0 10px;
+            animation: slideInRight 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+        
+        .invitation-text {
+            font-size: 1em; line-height: 1.8; margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .divider {
+            width: 80px; height: 3px; background-color: var(--primary-color);
+            margin: 24px auto; border-radius: 2px;
+        }
+        
+        .final-words {
+            font-style: italic;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        /* DETAIL */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .detail-box {
+            background-color: var(--accent-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            color: var(--text-color);
+        }
+
+        .detail-box h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+        }
+
+        .detail-box ul { list-style: none; padding: 0; margin: 0; }
+        .detail-box li { margin-bottom: 10px; }
+
+        /* Tombol RSVP + Lokasi */
+        .btn-row {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0;
+        }
+
+        a.btn-link {
+            display: inline-block; padding: 12px 24px; text-decoration: none;
+            border-radius: 30px; font-weight: 600; color: #fff;
+            background-color: var(--primary-color); transition: .3s;
+        }
+
+        a.btn-link:hover { background-color: var(--secondary-color); }
+        
+        /* Gaya untuk tombol kalender */
+        .btn-calendar {
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: .3s;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-calendar:hover {
+            background-color: #5a6268;
+        }
+
+        /* Nomor Rekening */
+        .bank-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .bank-details h4 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .bank-info {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            max-width: 300px;
+            width: 100%;
+        }
+        .bank-info p {
+            margin: 0;
+        }
+        .btn-copy {
+            background: var(--secondary-color);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: .3s;
+            margin-top: 10px;
+        }
+        .btn-copy:hover {
+            background: var(--primary-color);
+        }
+
+        /* GALERI */
+        .gallery {
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            width: 100%;
+        }
+
+        .gallery img, .gallery video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform .3s;
+            object-fit: cover;
+        }
+
+        .gallery img:hover, .gallery video:hover { transform: scale(1.05); }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox img, .lightbox video { max-width: 90%; max-height: 90%; border-radius: 10px; }
+        .lightbox.show { display: flex; }
+
+        /* Countdown */
+        .countdown-timer {
+            margin-top: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown-timer div { text-align: center; }
+        
+        .countdown-timer span {
+            display: block; font-size: 1em; font-weight: bold; color: var(--text-color);
+        }
+        
+        .countdown-timer .label {
+            font-size: 0.6em; text-transform: uppercase; color: var(--secondary-color);
+        }
+        
+        @media (min-width: 768px) {
+            .details-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- COVER -->
+<audio id="bgMusic" src="lombasihir.mp3" preload="auto" loop></audio>
+
 <div class="cover" id="cover">
-  <div class="envelope">
-    <div class="flap"></div>
-  </div>
-  <p style="margin:0;">Kepada Yth.</p>
-  <p class="guest-name" id="guestCover">Sahabat Kami</p>
-  <button class="btn-open" id="btnOpen">Buka Undangan</button>
+    <div class="cover-content">
+        <p>Undangan Pernikahan</p>
+        <h1>Adelia & Rizky</h1>
+        <p>Kepada Yth. <span id="guestCover">Sahabat Kami</span></p>
+        <button class="btn-open" id="btnOpen">Buka Undangan</button>
+    </div>
 </div>
 
-<!-- MUSIK -->
-<audio id="bgMusic" loop>
-  <source src="wedding-romantic-wedding-background-music-383867.mp3" type="audio/mpeg">
-</audio>
-
-<!-- ISI UNDANGAN -->
 <div class="content" id="content">
-  <div class="overlay">
-    <div class="bride-groom">Rizky & Adel</div>
-    <div class="subtitle">Sabtu, 20 September 2025</div>
+    <div class="section-container">
+        <div class="arabic-text">
+            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+        </div>
+        <p class="final-words" style="margin-bottom: 20px;">
+            "Bismillāhirraḥmānirraḥīm"
+        </p>
 
-    <div class="quran">
-      “Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri
-      dari jenismu sendiri, supaya kamu merasa tenang dan tentram kepadanya,
-      dan dijadikan-Nya diantaramu rasa kasih dan sayang.
-      Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda
-      bagi kaum yang berfikir.” (QS. Ar-Rum: 21)
+        <div class="bride-groom">
+            <span class="batik-pattern"></span>Adelia & Rizky<span class="batik-pattern"></span>
+        </div>
+        <div class="subtitle">Minggu, 07 September 2025</div>
+        
+        <div class="countdown-timer" id="countdown"></div>
+        
+        <div class="divider"></div>
+
+        <div class="invitation-text">
+            <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara istimewa kami, sebuah lembaran baru dalam perjalanan hidup kami.</p>
+            <p>Kami bersyukur atas cinta dan restu-Mu yang telah menuntun kami hingga detik ini.
+            Semoga ikatan suci ini menjadi jalan bagi kami untuk mencapai Surga-Mu.</p>
+        </div>
+
+        <div class="divider"></div>
+        
+        <div class="invitation-text">
+            <p style="font-style: italic;">"Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir” (QS. Ar-Rum: 21)</p>
+            <p>Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+            <p>Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami:</p>
+            <p><strong>Adelia Nurfajriani, S.Ak</strong><br>Putri dari Bapak Sugianto & Ibu Misri</p>
+            <p>dengan</p>
+            <p><strong>Rizky Darmadi, S.Kom</strong><br>Putra dari Bapak Admadi Miran & Ibu Darmini</p>
+        </div>
     </div>
 
-    <div class="invitation-text">
-      <p>Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
-      <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan
-      resepsi pernikahan putra-putri kami:</p>
-      <p style="font-weight:bold;">Rizky Darmadi &amp; Adelia Nurfajriani</p>
-      <p>Kami dengan hormat mengundang Bapak/Ibu/Saudara/i <strong id="guestMain">Sahabat Kami</strong>
-      untuk hadir dan memberikan doa restu pada:</p>
+    <div class="section-container">
+        <div class="details-grid">
+            <div class="detail-box">
+                <h3>Akad Nikah</h3>
+                <ul>
+                    <li>🗓 Minggu, 07 September 2025</li>
+                    <li>🕘 Pukul 09.00 WIB - Selesai</li>
+                    <li>📍 Gg H Niang, Gandul Kec. Cinere, Kota Depok</li>
+                </ul>
+            </div>
+            <div class="detail-box">
+                <h3>Resepsi</h3>
+                <ul>
+                    <li>Setelah akad selesai</li>
+                    <li>🗓 Minggu, 07 September 2025</li>
+                    <li>🕘 Pukul 11.00 WIB - Selesai</li>
+                    <li>📍 Gg H Niang, Gandul Kec. Cinere, Kota Depok</li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-row">
+            <a class="btn-link" href="https://maps.app.goo.gl/FCofiUvmeCm3Guu67" target="_blank">📍 Lihat Lokasi</a>
+            <a id="waRsvp" class="btn-link" href="#" target="_blank">✅ Konfirmasi Kehadiran</a>
+            <a id="addToCalendar" class="btn-link" href="#">🗓 Tambahkan ke Kalender</a>
+        </div>
     </div>
 
-    <div class="divider"></div>
-    
-    <div class="details">
-      <h3>Akad Nikah</h3>
-      <ul>
-        <li>🗓 Sabtu, 20 September 2025</li>
-        <li>🕘 Pukul 09.00 WIB</li>
-        <li>📍 Gedung Serbaguna H. Nawi, Jakarta Selatan</li>
-      </ul>
-      <h3>Resepsi</h3>
-      <ul>
-        <li>🕛 Pukul 11.00 – 14.00 WIB</li>
-      </ul>
+    <div class="section-container">
+        <h3>Galeri Kami</h3>
+        <div class="gallery">
+            <video controls>
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            <img src="grid1.jpg" alt="grid 1">
+            <img src="grid2.jpg" alt="grid 2">
+            <img src="grid3.jpg" alt="grid 3">
+            <img src="grid4.jpg" alt="grid 4">
+            <img src="grid5.jpg" alt="grid 5">
+            <img src="grid6.jpg" alt="grid 6">
+            <img src="grid7.jpg" alt="grid 7">
+            <img src="grid8.jpg" alt="grid 8">
+            <img src="grid9.jpg" alt="grid 9">
+        </div>
     </div>
 
-    <a class="btn-link" href="https://maps.google.com" target="_blank">📍 Lihat Lokasi</a>
-    <a id="waRsvp1" class="btn-link" href="#" target="_blank">✅ Konfirmasi (Rizky)</a>
-    <a id="waRsvp2" class="btn-link" href="#" target="_blank">✅ Konfirmasi (Adel)</a>
-    
-    <div class="gift">
-      Doa restu Anda adalah hadiah terindah bagi kami.<br>
-      Jika berkenan memberi tanda kasih, dapat melalui:
-      <div class="gift-box">
-        BCA <strong>1234567890</strong> a.n <strong>Rizky Darmadi</strong>
-      </div>
+    <div class="section-container">
+        <h3>Hadiah Pernikahan</h3>
+        <p>Bagi Bapak/Ibu/Saudara/i yang ingin mengirimkan hadiah, dapat melalui transfer ke rekening berikut:</p>
+        <div class="bank-details">
+            <div class="bank-info">
+                <h4>Bank BCA</h4>
+                <p><strong>Nomor Rekening:</strong> <span id="rekeningBCA">2040351534</span></p>
+                <p><strong>Atas Nama:</strong> Adelia Nurfajriani</p>
+                <button class="btn-copy" onclick="copyToClipboard('rekeningBCA')">Salin Nomor</button>
+            </div>
+        </div>
     </div>
-    
-    <div style="margin-top:30px; font-size:0.9em; color:#666;">
-      Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
-      berkenan hadir dan memberikan doa restu.
+
+    <div class="section-container">
+        <div class="invitation-text">
+            <p style="font-weight: bold;">Terima kasih atas segala doa, restu, dan kehadiran Anda. Semoga Allah SWT memberkahi kita semua.</p>
+        </div>
+        <div style="margin-top:16px;">Wassalamu’alaikum Warahmatullahi Wabarakatuh</div>
     </div>
-    
-    <div style="margin-top:16px;">Wassalamu’alaikum Warahmatullahi Wabarakatuh</div>
-  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <img id="lightboxImg" src="" alt="">
 </div>
 
 <script>
-  function getGuestName() {
-    const params = new URLSearchParams(location.search);
-    const raw = params.get('to');
-    if (!raw) return null;
-    let name = decodeURIComponent(raw).replace(/\+/g,' ').trim();
-    name = name.split(' ').map(w=> w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
-    return name || null;
-  }
+    // Fungsi untuk mendapatkan nama tamu dari URL
+    function getGuestName() {
+        const params = new URLSearchParams(location.search);
+        const raw = params.get('to');
+        if (!raw) return null;
+        let name = decodeURIComponent(raw).replace(/\+/g, ' ').trim();
+        name = name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        return name || null;
+    }
 
-  const guestName = getGuestName();
-  const guestCover = document.getElementById('guestCover');
-  const guestMain = document.getElementById('guestMain');
-  if (guestName) {
-    guestCover.textContent = guestName;
-    guestMain.textContent = guestName;
-    document.title = `Undangan untuk ${guestName}`;
-  }
+    const guestName = getGuestName();
+    const guestCover = document.getElementById('guestCover');
+    if (guestName) guestCover.textContent = guestName;
 
-  const cover = document.getElementById('cover');
-  const content = document.getElementById('content');
-  const music = document.getElementById('bgMusic');
+    const cover = document.getElementById('cover');
+    const content = document.getElementById('content');
+    const music = document.getElementById('bgMusic');
 
-  document.getElementById('btnOpen').addEventListener('click', () => {
-    cover.classList.add('open');
-    music.play().catch(()=>{}); // Play musik saat buka
-    setTimeout(()=>{
-      cover.style.opacity = '0';
-      cover.style.pointerEvents = 'none';
-      content.classList.add('show');
-    }, 1200);
-  });
+    // Event listener untuk tombol "Buka Undangan"
+    document.getElementById('btnOpen').addEventListener('click', () => {
+        cover.style.transform = 'translateY(-100%)';
+        cover.style.opacity = '0';
+        
+        setTimeout(() => {
+            cover.style.display = 'none';
+            content.classList.add('show');
+            music.play();
+            startAutoScroll();
+        }, 1200);
+    });
 
-  const waNumber1 = '6281234567890'; // Rizky
-  const waNumber2 = '6289876543210'; // Adel
-  const msg = guestName
-    ? `Halo, saya ${guestName} ingin konfirmasi kehadiran untuk acara pernikahan Rizky & Adel.`
-    : `Halo, saya ingin konfirmasi kehadiran untuk acara pernikahan Rizky & Adel.`;
-  document.getElementById('waRsvp1').href = `https://wa.me/${waNumber1}?text=${encodeURIComponent(msg)}`;
-  document.getElementById('waRsvp2').href = `https://wa.me/${waNumber2}?text=${encodeURIComponent(msg)}`;
+    // RSVP WA
+    const waNumber = '6281283359408';
+    const msg = guestName
+        ? `Halo, saya ${guestName} ingin konfirmasi kehadiran untuk acara pernikahan Adelia & Rizky.`
+        : `Halo, saya ingin konfirmasi kehadiran untuk acara pernikahan Adelia & Rizky.`;
+    document.getElementById('waRsvp').href = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    document.querySelectorAll('.gallery img, .gallery video').forEach(media => {
+        media.addEventListener('click', () => {
+            if (media.tagName === 'IMG') {
+                lightboxImg.src = media.src;
+                lightboxImg.style.display = 'block';
+            } else {
+                const video = document.createElement('video');
+                video.src = media.querySelector('source').src;
+                video.controls = true;
+                video.autoplay = true;
+                video.style.maxWidth = '90%';
+                video.style.maxHeight = '90%';
+                
+                lightbox.innerHTML = '';
+                lightbox.appendChild(video);
+            }
+            lightbox.classList.add('show');
+        });
+    });
+
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('show');
+        const video = lightbox.querySelector('video');
+        if (video) video.pause();
+    });
+    
+    // Countdown Timer
+    function updateCountdown() {
+        const weddingDate = new Date("September 7, 2025 09:00:00").getTime();
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const countdownElement = document.getElementById('countdown');
+        if (distance > 0) {
+            countdownElement.innerHTML = `
+                <div><span>${days}</span><div class="label">Hari</div></div>
+                <div><span>${hours}</span><div class="label">Jam</div></div>
+                <div><span>${minutes}</span><div class="label">Menit</div></div>
+                <div><span>${seconds}</span><div class="label">Detik</div></div>
+            `;
+        } else {
+            countdownElement.innerHTML = `<h3>Kami Berbahagia!</h3>`;
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+
+    // Auto-scroll
+    let scrollInterval;
+    const scrollSpeed = 100;
+    
+    function startAutoScroll() {
+        if (scrollInterval) clearInterval(scrollInterval);
+        
+        scrollInterval = setInterval(() => {
+            const currentScrollPos = content.scrollTop;
+            const maxScroll = content.scrollHeight - content.clientHeight;
+            
+            if (currentScrollPos >= maxScroll) {
+                clearInterval(scrollInterval);
+            } else {
+                content.scrollTop += 1;
+            }
+        }, scrollSpeed);
+    }
+    
+    // Hentikan auto-scroll jika pengguna menggulir secara manual
+    content.addEventListener('wheel', () => clearInterval(scrollInterval));
+    content.addEventListener('touchmove', () => clearInterval(scrollInterval));
+
+    // Salin nomor rekening ke clipboard
+    function copyToClipboard(elementId) {
+        const copyText = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(copyText).then(() => {
+            alert("Nomor rekening berhasil disalin!");
+        }).catch(err => {
+            console.error('Gagal menyalin: ', err);
+            alert("Gagal menyalin nomor rekening.");
+        });
+    }
+
+    // Tambahkan ke Kalender
+    document.getElementById('addToCalendar').addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const eventTitle = "Pernikahan Adelia & Rizky";
+        const eventLocation = "Gg H Niang, Gandul Kec. Cinere, Kota Depok";
+        const eventDescription = "Akad dan Resepsi Pernikahan Adelia Nurfajriani dan Rizky Darmadi. Kehadiran dan doa restu Anda adalah suatu kehormatan bagi kami.";
+        
+        // Tanggal dan waktu acara (format YYYY-MM-DDTHH:mm:ss)
+        const startDate = new Date("2025-09-07T09:00:00");
+        const endDate = new Date("2025-09-07T16:00:00"); // Hingga pukul 16.00 WIB
+
+        const formatDateTime = (date) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            return `${year}${month}${day}T${hours}${minutes}${seconds}`;
+        };
+
+        const gcalUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${formatDateTime(startDate)}/${formatDateTime(endDate)}&details=${encodeURIComponent(eventDescription)}&location=${encodeURIComponent(eventLocation)}`;
+        
+        window.open(gcalUrl, '_blank');
+    });
 </script>
 </body>
 </html>
